@@ -214,7 +214,7 @@ function makeMutClosure(arg0, arg1, dtor, f) {
     return real;
 }
 function __wbg_adapter_26(arg0, arg1) {
-    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h1d253964862127ef(arg0, arg1);
+    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h3a8895f9848e132f(arg0, arg1);
 }
 
 function makeClosure(arg0, arg1, dtor, f) {
@@ -782,19 +782,19 @@ function getImports() {
         const ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper205 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 40, __wbg_adapter_26);
+    imports.wbg.__wbindgen_closure_wrapper231 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 54, __wbg_adapter_26);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper441 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper442 = function(arg0, arg1, arg2) {
         const ret = makeClosure(arg0, arg1, 160, __wbg_adapter_29);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper607 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper608 = function(arg0, arg1, arg2) {
         const ret = makeMutClosure(arg0, arg1, 202, __wbg_adapter_32);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper640 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper641 = function(arg0, arg1, arg2) {
         const ret = makeMutClosure(arg0, arg1, 211, __wbg_adapter_35);
         return addHeapObject(ret);
     };
@@ -834,7 +834,7 @@ function initSync(module) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('rustetris-bd9fd9ca46d1a840_bg.wasm', import.meta.url);
+        input = new URL('rustetris-9f01e9e5c316430a_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
