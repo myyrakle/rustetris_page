@@ -21,15 +21,6 @@ function takeObject(idx) {
     return ret;
 }
 
-function addHeapObject(obj) {
-    if (heap_next === heap.length) heap.push(heap.length + 1);
-    const idx = heap_next;
-    heap_next = heap[idx];
-
-    heap[idx] = obj;
-    return idx;
-}
-
 const cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: true });
 
 cachedTextDecoder.decode();
@@ -45,6 +36,15 @@ function getUint8Memory0() {
 
 function getStringFromWasm0(ptr, len) {
     return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
+}
+
+function addHeapObject(obj) {
+    if (heap_next === heap.length) heap.push(heap.length + 1);
+    const idx = heap_next;
+    heap_next = heap[idx];
+
+    heap[idx] = obj;
+    return idx;
 }
 
 function isLikeNone(x) {
@@ -250,6 +250,20 @@ function __wbg_adapter_35(arg0, arg1, arg2) {
     wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h2be5002841488fa3(arg0, arg1, addHeapObject(arg2));
 }
 
+/**
+* @param {CanvasRenderingContext2D} context
+* @param {number} x
+* @param {number} y
+* @param {number} block_width_size
+* @param {number} block_height_size
+* @param {string} color
+*/
+export function draw_block(context, x, y, block_width_size, block_height_size, color) {
+    const ptr0 = passStringToWasm0(color, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    wasm.draw_block(addHeapObject(context), x, y, block_width_size, block_height_size, ptr0, len0);
+}
+
 let cachedUint32Memory0 = new Uint32Array();
 
 function getUint32Memory0() {
@@ -271,11 +285,12 @@ function passArray32ToWasm0(arg, malloc) {
 * @param {number} board_height
 * @param {number} column_count
 * @param {number} row_count
+* @param {number} hidden_row_count
 */
-export function render_board(board_unfolded, board_width, board_height, column_count, row_count) {
+export function render_board(board_unfolded, board_width, board_height, column_count, row_count, hidden_row_count) {
     const ptr0 = passArray32ToWasm0(board_unfolded, wasm.__wbindgen_malloc);
     const len0 = WASM_VECTOR_LEN;
-    wasm.render_board(ptr0, len0, board_width, board_height, column_count, row_count);
+    wasm.render_board(ptr0, len0, board_width, board_height, column_count, row_count, hidden_row_count);
 }
 
 /**
@@ -316,20 +331,6 @@ export function run_render() {
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
     }
-}
-
-/**
-* @param {CanvasRenderingContext2D} context
-* @param {number} x
-* @param {number} y
-* @param {number} block_width_size
-* @param {number} block_height_size
-* @param {string} color
-*/
-export function draw_block(context, x, y, block_width_size, block_height_size, color) {
-    const ptr0 = passStringToWasm0(color, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-    const len0 = WASM_VECTOR_LEN;
-    wasm.draw_block(addHeapObject(context), x, y, block_width_size, block_height_size, ptr0, len0);
 }
 
 function handleError(f, args) {
@@ -402,12 +403,12 @@ function getImports() {
         const ret = false;
         return ret;
     };
-    imports.wbg.__wbindgen_object_clone_ref = function(arg0) {
-        const ret = getObject(arg0);
-        return addHeapObject(ret);
-    };
     imports.wbg.__wbindgen_string_new = function(arg0, arg1) {
         const ret = getStringFromWasm0(arg0, arg1);
+        return addHeapObject(ret);
+    };
+    imports.wbg.__wbindgen_object_clone_ref = function(arg0) {
+        const ret = getObject(arg0);
         return addHeapObject(ret);
     };
     imports.wbg.__wbg_process_0cc2ada8524d6f83 = function(arg0) {
@@ -782,20 +783,20 @@ function getImports() {
         const ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper231 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 54, __wbg_adapter_26);
+    imports.wbg.__wbindgen_closure_wrapper244 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 66, __wbg_adapter_26);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper442 = function(arg0, arg1, arg2) {
-        const ret = makeClosure(arg0, arg1, 160, __wbg_adapter_29);
+    imports.wbg.__wbindgen_closure_wrapper445 = function(arg0, arg1, arg2) {
+        const ret = makeClosure(arg0, arg1, 164, __wbg_adapter_29);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper608 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 202, __wbg_adapter_32);
+    imports.wbg.__wbindgen_closure_wrapper611 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 206, __wbg_adapter_32);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper641 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 211, __wbg_adapter_35);
+    imports.wbg.__wbindgen_closure_wrapper644 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 215, __wbg_adapter_35);
         return addHeapObject(ret);
     };
 
@@ -834,7 +835,7 @@ function initSync(module) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('rustetris-9f01e9e5c316430a_bg.wasm', import.meta.url);
+        input = new URL('rustetris-970637a456b22ce3_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
